@@ -159,5 +159,15 @@ namespace Corona_M_system.Controllers
         {
           return (_context.UserInfo?.Any(e => e.Id == id)).GetValueOrDefault();
         }
+
+        public IActionResult CountVaccinatedMembers()
+        {
+            var vaccinatedMembersCount = _context.Vaccination
+                .Select(v => v.Eid) 
+                .Distinct()        
+                .Count();           
+            return Ok(vaccinatedMembersCount);
+        }
+
     }
 }
